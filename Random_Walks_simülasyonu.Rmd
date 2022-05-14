@@ -1,0 +1,69 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+# random walk
+
+x = 0
+y = 0
+
+adim_sayisi = 100
+
+# for, if döngüsü. rasgele adim atmak için
+
+for (i in 1:adim_sayisi){
+  # 1 ile 4 arasi rasgele bir sayi üretir
+  s = sample(1:4,1)
+  if (s==1){ #sola adım için x den -1 cıkar
+    x = c( x, x[length(x)] - 1)
+    y = c(y, y[length(y)] + 0)
+  }
+  
+
+  if (s==2){# sağa adim için x e 1 eklenir
+    x = c(x,x[length(x)]+1)
+    y = c(y, y[length(y)] + 0)
+  }
+  
+  if (s==3){ #yukari için y e 1 eklenir
+    x = c(x, x[length(x)]+0)
+    y = c(y, y[length(y)] + 1)
+    
+  }
+  
+  if (s==4){ #aşağı için y den 1 cıkarılır
+    x = c(x, x[length(x)]+0)
+    y = c(y, y[length(y)] - 1)
+  }
+  
+}
+
+# black bg and remove margins
+par(bg='black',mar=rep(0,4))
+
+plot(x,y,col="orange",type='n') # make it empty
+
+#kordinat sistemine orjin ekleme
+points(0,0,col='red',pch=19)
+
+#arrows 
+#a = 2:adim_sayisi
+
+# gökkuşağı renkleri ekle
+clr = rainbow(adim_sayisi)
+
+
+# yön oklarını ekleme
+
+for (i in 2:adim_sayisi){
+ 
+  Sys.sleep(0.15)
+  
+  arrows(x[i-1],y[i-1], x[i], y[i],length = 0.1, col=clr[i])
+}
+
+
+```
+
